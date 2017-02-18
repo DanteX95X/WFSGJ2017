@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 	bool isJumping;
 	Vector3 jumpDirection;
 	Camera mainCamera;
+	Transform renderer;
 
 
 	float jumpTimer = 0;
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
 	{
 		isJumping = true;
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+		renderer = this.gameObject.transform.GetChild(0);
 	}
 
 	void Update()
@@ -54,7 +56,6 @@ public class Player : MonoBehaviour
 		else if (loadJump && (Input.GetKeyUp(KeyCode.Mouse0) || (Input.GetKey(KeyCode.Mouse0) && (Time.time - jumpTimer) > maxJumpPressingTime)))
 		{
 			float deltaTime = Time.time - jumpTimer;
-
 			float scale = 0.0f;
 			if (deltaTime > minJumpPressingTime)
 			{
@@ -63,8 +64,14 @@ public class Player : MonoBehaviour
 
 			Jump(jumpForce + jumpForce * scale * jumpScale * (maxJumpPressingTime - minJumpPressingTime));
 
+
 			jumpTimer = Time.time;
 			loadJump = false;
+		}
+		if (loadJump)
+		{
+			renderer.localScale = Vector3.Lerp(new Vector3(1, 1, 1), new Vector3(1, 0.5f, 1), (Time.time - jumpTimer) / maxJumpPressingTime);
+			renderer.localPosition = Vector3.Lerp(new Vector3(0, 0, 0), new Vector3(0, 0 - 0.3f, 0), (Time.time - jumpTimer) / maxJumpPressingTime);
 		}
 	}
 	void FixedUpdate()
@@ -88,6 +95,8 @@ public class Player : MonoBehaviour
         if (isJumping)
             return;
 
+		renderer.localScale = new Vector3(1, 1, 1);
+		renderer.localPosition = new Vector3(0, 0, 0);
 		jumpDirection = Input.mousePosition;
 
 		jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
