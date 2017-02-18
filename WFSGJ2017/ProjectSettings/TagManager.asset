@@ -6,6 +6,7 @@ TagManager:
   tags:
   - obstacle
   - jellyObstacle
+  - checkpoint
   layers:
   - Default
   - TransparentFX

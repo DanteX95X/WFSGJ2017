@@ -37,5 +37,16 @@ class Game : MonoBehaviour
 			GetComponent<CameraController>().Player = player;
 		}
 	}
+
+	public void NextCheckpoint(GameObject checkpoint)
+	{
+		for(int i = currentCheckpoint; i < checkpoints.Count; ++i)
+		{
+			if(checkpoints[i] == checkpoint)
+			{
+				currentCheckpoint = i;
+			}
+		}
+	}
 	#endregion
 }

@@ -160,5 +160,13 @@ public class Player : MonoBehaviour
 		}
 	}
 
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		if(collider.gameObject.tag == "checkpoint")
+		{
+			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
+		}
+	}
+
 	#endregion methods
 }
