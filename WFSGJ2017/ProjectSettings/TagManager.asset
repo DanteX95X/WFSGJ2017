@@ -8,6 +8,7 @@ TagManager:
   - jellyObstacle
   - Trigger
   - checkpoint
+  - levelFragment
   layers:
   - Default
   - TransparentFX

@@ -7,7 +7,7 @@ public class TriggerDestroyObject : MonoBehaviour {
 	#region variables
 
 	[SerializeField]
-	GameObject objectToDestroy;
+	GameObject objectToDestroy = null;
 
 	#endregion
 

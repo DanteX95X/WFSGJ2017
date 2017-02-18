@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 	bool loadJump = false;
 
 	[SerializeField]
-	float jumpForce;
+	float jumpForce = 0;
 
 	#endregion
 
