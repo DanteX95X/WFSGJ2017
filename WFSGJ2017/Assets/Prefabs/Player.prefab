@@ -127,8 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d7deddcc891c441975285a1515ca41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpScale: 1
-  minJumpPressingTime: 0.4
+  jumpScale: 0.3
+  minJumpPressingTime: 0
   maxJumpPressingTime: 2
   liftJumpPower: 100
   jumpForce: 300
