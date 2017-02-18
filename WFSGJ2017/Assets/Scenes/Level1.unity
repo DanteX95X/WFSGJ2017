@@ -710,6 +710,7 @@ MonoBehaviour:
   - {fileID: 1758424597417670, guid: a054cd7bf01e59e4a8e07ee03606689c, type: 2}
   - {fileID: 1816734666130762, guid: 365185a5abfb73b4e828d951da69d023, type: 2}
   - {fileID: 1780151146609518, guid: 417c54f6d09521243883a0038dd2270b, type: 2}
+  flag: {fileID: 1737167029647678, guid: 8bae3a7ff9b4ebf4c892228ef360af17, type: 2}
   currentCheckpoint: 0
 --- !u!114 &1756202962
 MonoBehaviour:

@@ -8,7 +8,7 @@ public class HandOfGod : MonoBehaviour {
 	GameObject player;
 
 	[SerializeField]
-	float speedX;
+	float speedX = 0;
 	#endregion
 
 	#region properties

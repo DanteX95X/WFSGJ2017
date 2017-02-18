@@ -16,6 +16,8 @@ class Game : MonoBehaviour
 	GameObject levelFragmentParent = null;
 	[SerializeField]
 	List<GameObject> levelFragments = null;
+	[SerializeField]
+	GameObject flag = null;
 
 	[SerializeField]
 	int currentCheckpoint = 0;
@@ -34,6 +36,7 @@ class Game : MonoBehaviour
 		Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
 		if(checkpointSlideshow)
             checkpointSlideshow.ShowCutscene();
+		Instantiate(flag, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation).transform.Translate(new Vector3(0, 0, 1));
 
 		player = null;
 	}
@@ -72,6 +75,7 @@ class Game : MonoBehaviour
 					checkpointSlideshow.ShowCutscene();
 
 				currentCheckpoint = i;
+				Instantiate(flag, checkpoint.transform.position, checkpoint.transform.rotation).transform.Translate(new Vector3(0,0,1));
 			}
 		}
 	}

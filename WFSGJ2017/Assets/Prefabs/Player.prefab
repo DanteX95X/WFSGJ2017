@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114640063028970394}
   - component: {fileID: 50631683943508076}
   - component: {fileID: 61313038739110276}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -131,4 +131,5 @@ MonoBehaviour:
   minJumpPressingTime: 0
   maxJumpPressingTime: 2
   liftJumpPower: 100
+  liftSpeed: 0.005
   jumpForce: 300
