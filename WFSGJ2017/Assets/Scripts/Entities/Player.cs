@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
     #region variables
     bool isJumping;
 	Vector3 jumpDirection;
 	Camera mainCamera;
 
-    [SerializeField]
-    float jumpForceY;
 
-    #endregion
+	[SerializeField]
+	float jumpForceY;
 
-    #region properties
+	#endregion
 
-    #endregion
+	#region properties
 
+	#endregion
 
-    #region methods
+	#region methods
 
     void Start ()
     {
@@ -57,12 +58,30 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
 		GameObject collider = collision.collider.gameObject;
-        if (collider.tag == "obstacle" 
-			&& (collider.transform.position.y - collider.transform.localScale.y) < (transform.position.y - transform.localScale.y))
-        {
-            isJumping = false;
+		if (collider.tag == "obstacle" )
+		{
+			if (collider.transform.position.y < transform.position.y)
+			{
+				if ( transform.position.x < (collider.transform.position.x + collider.transform.localScale.x / 2) 
+					&& transform.position.x > (collider.transform.position.x - collider.transform.localScale.x / 2) 
+					)
+				{
+					Debug.Log("Jump reset");
+					isJumping = false;
+				}
+				else
+				{
+					Debug.Log("Reflected");
+					Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+					rigidbody.AddForce(new Vector2(-100, jumpForceY));
+				}
+			}
+			else
+			{
+				
+			}
 		}
-    }
+	}
 
-    #endregion methods
+	#endregion methods
 }
