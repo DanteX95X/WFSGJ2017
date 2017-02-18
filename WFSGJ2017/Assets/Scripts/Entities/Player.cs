@@ -5,9 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     #region variables
-
-    [SerializeField]
     bool isJumping;
+
     [SerializeField]
     float jumpForceY;
 
@@ -22,14 +21,13 @@ public class Player : MonoBehaviour
 
     void Start ()
     {
-        Debug.Log("Player created");
         isJumping = true;
         jumpForceY = 300;
 	}
 
 	void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.Space) && !isJumping)
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
@@ -37,17 +35,21 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
+        if (isJumping)
+            return;
+
         isJumping = true;
         GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceY));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.gameObject.tag == "obstacle")
+		GameObject collider = collision.collider.gameObject;
+        if (collider.tag == "obstacle" 
+			&& (collider.transform.position.y - collider.transform.localScale.y) < (transform.position.y - transform.localScale.y))
         {
-            Debug.Log("On ground");
             isJumping = false;
-        }
+		}
     }
 
     #endregion methods
