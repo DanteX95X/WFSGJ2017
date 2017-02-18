@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 	public float minJumpPressingTime = 1.0f;
 	public float maxJumpPressingTime = 8.0f;
 
+	public float liftJumpPower =100;
+
 	bool loadJump = false;
 
 	[SerializeField]
@@ -62,6 +64,21 @@ public class Player : MonoBehaviour
 
 			jumpTimer = Time.time;
 			loadJump = false;
+		}
+	}
+	void FixedUpdate()
+	{
+		RotationCheck();
+	}
+	void RotationCheck()
+	{
+		float zRot = this.transform.rotation.eulerAngles.z;
+		if (zRot > 5 && zRot < 355 && GetComponent<Rigidbody2D>().velocity.magnitude==0)
+		{
+			Debug.Log("Poprawka! " + zRot);
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(0,liftJumpPower));
+			//GetComponent<Rigidbody2D>().MoveRotation(0);
+			this.transform.Rotate(-this.transform.rotation.eulerAngles);
 		}
 	}
 
