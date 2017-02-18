@@ -131,4 +131,4 @@ MonoBehaviour:
   minJumpPressingTime: 0.4
   maxJumpPressingTime: 2
   liftJumpPower: 100
-  jumpForce: 0
+  jumpForce: 300
