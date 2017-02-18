@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     #region variables
     bool isJumping;
+	Vector3 jumpDirection;
+	Camera mainCamera;
 
     [SerializeField]
     float jumpForceY;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     {
         isJumping = true;
         jumpForceY = 300;
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
 	void Update ()
@@ -38,8 +41,17 @@ public class Player : MonoBehaviour
         if (isJumping)
             return;
 
-        isJumping = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceY));
+		jumpDirection = Input.mousePosition;
+
+			jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
+			jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
+			jumpDirection = (jumpDirection - transform.position).normalized * jumpForceY;
+			if (jumpDirection.y > 0)
+			{
+				isJumping = true;
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
+			}
+
     }
 
     void OnCollisionEnter2D(Collision2D collision)
