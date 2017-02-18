@@ -6,7 +6,10 @@ public class Player : MonoBehaviour
 {
     #region variables
 
+    [SerializeField]
     bool isJumping;
+    [SerializeField]
+    float jumpForceY;
 
     #endregion
 
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Player created");
         isJumping = true;
+        jumpForceY = 300;
 	}
 
 	void Update ()
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour
     void Jump()
     {
         isJumping = true;
-        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 1000));
+        GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceY));
     }
 
     void OnCollisionEnter2D(Collision2D collision)
