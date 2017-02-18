@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 			return;
 
 		isJumping = true;
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceY));
+		GetComponent<Rigidbody2D>().AddForce(new Vector2(100, jumpForceY));
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
@@ -46,18 +46,25 @@ public class Player : MonoBehaviour
 		GameObject collider = collision.collider.gameObject;
 		if (collider.tag == "obstacle" )
 		{
-			//Debug.Log((collider.transform.position.y + collider.transform.localScale.y / 2));
-			//Debug.Log((transform.position.y - transform.localScale.y / 2));
 			if (collider.transform.position.y < transform.position.y)
 			{
-				//if((transform.position.x - transform.localScale.x) > transform.position )
-				Debug.Log("Jump reset");
-				isJumping = false;
+				if ( transform.position.x < (collider.transform.position.x + collider.transform.localScale.x / 2) 
+					&& transform.position.x > (collider.transform.position.x - collider.transform.localScale.x / 2) 
+					)
+				{
+					Debug.Log("Jump reset");
+					isJumping = false;
+				}
+				else
+				{
+					Debug.Log("Reflected");
+					Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+					rigidbody.AddForce(new Vector2(-100, jumpForceY));
+				}
 			}
 			else
 			{
-				//Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-				//rigidbody.velocity = new Vector2(-rigidbody.velocity.x, rigidbody.velocity.y);
+				
 			}
 		}
 	}
