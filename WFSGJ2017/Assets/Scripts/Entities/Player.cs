@@ -92,9 +92,6 @@ public class Player : MonoBehaviour
 		{
 			if (collider.transform.position.y < transform.position.y)
 			{
-				Debug.Log(rigidbody.position.x);
-				Debug.Log((colliderRigidbody.position.x + collider.transform.localScale.x / 2));
-				Debug.Log((colliderRigidbody.position.x - collider.transform.localScale.x / 2));
 				if ( rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) 
 					&& rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2) 
 					)
@@ -120,13 +117,24 @@ public class Player : MonoBehaviour
 					((rigidbody.position.x + transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
 					|| (rigidbody.position.x - transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2)))
 					&&
-					(rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) || rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2))
+					(/*rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) ||*/ rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2))
 					)
 			{
 				Debug.Log("Reflected");
 				rigidbody.AddForce(new Vector2(jumpDirection.x, -jumpDirection.y));
 			}
+			else if (
+					((rigidbody.position.x + transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
+					|| (rigidbody.position.x - transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2)))
+					&&
+					(rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) /*|| rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2)*/)
+					)
+			{
+				Debug.Log("Reflected");
+				rigidbody.AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
+			}
 		}
+		
 	}
 
 	#endregion methods
