@@ -10,6 +10,10 @@ class Game : MonoBehaviour
 	List<GameObject> checkpoints = null;
 	[SerializeField]
 	GameObject playerPrefab = null;
+	[SerializeField]
+	GameObject levelFragmentParent = null;
+	[SerializeField]
+	List<GameObject> levelFragments = null;
 
 	int currentCheckpoint;
 	GameObject player;
@@ -35,6 +39,13 @@ class Game : MonoBehaviour
 		{
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
 			GetComponent<CameraController>().Player = player;
+			for(int i = currentCheckpoint; i < levelFragmentParent.transform.childCount && i < levelFragments.Count; ++i)
+			{
+				GameObject child = levelFragmentParent.transform.GetChild(i).gameObject;
+				GameObject newFragment = Instantiate(levelFragments[i], child.transform.position, child.transform.rotation) as GameObject;
+				newFragment.transform.parent = levelFragmentParent.transform;
+				Destroy(child);
+			}
 		}
 	}
 
