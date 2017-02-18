@@ -9,11 +9,15 @@ class Game : MonoBehaviour
 	[SerializeField]
 	List<GameObject> checkpoints = null;
 	[SerializeField]
+	GameObject handOfGod = null;
+	[SerializeField]
 	GameObject playerPrefab = null;
 	[SerializeField]
 	GameObject levelFragmentParent = null;
 	[SerializeField]
 	List<GameObject> levelFragments = null;
+	[SerializeField]
+	GameObject flag = null;
 
 	[SerializeField]
 	int currentCheckpoint = 0;
@@ -32,6 +36,7 @@ class Game : MonoBehaviour
 		Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
 		if(checkpointSlideshow)
             checkpointSlideshow.ShowCutscene();
+		Instantiate(flag, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation).transform.Translate(new Vector3(0, 0, 1));
 
 		player = null;
 	}
@@ -47,7 +52,9 @@ class Game : MonoBehaviour
 		{
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
 			GetComponent<CameraController>().Player = player;
-			for(int i = currentCheckpoint; i < levelFragmentParent.transform.childCount && i < levelFragments.Count; ++i)
+			handOfGod.GetComponent<HandOfGod>().Player = player;
+			handOfGod.transform.position = new Vector3(player.transform.position.x - 10, player.transform.position.y, -1);
+			for (int i = currentCheckpoint; i < levelFragmentParent.transform.childCount && i < levelFragments.Count; ++i)
 			{
 				GameObject child = levelFragmentParent.transform.GetChild(i).gameObject;
 				GameObject newFragment = Instantiate(levelFragments[i], child.transform.position, child.transform.rotation) as GameObject;
@@ -68,6 +75,7 @@ class Game : MonoBehaviour
 					checkpointSlideshow.ShowCutscene();
 
 				currentCheckpoint = i;
+				Instantiate(flag, checkpoint.transform.position, checkpoint.transform.rotation).transform.Translate(new Vector3(0,0,1));
 			}
 		}
 	}
