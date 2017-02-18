@@ -166,8 +166,12 @@ public class Player : MonoBehaviour
 		//{
 			if (collider.transform.position.y < transform.position.y)
 			{
-				if (rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2)
-					&& rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2)
+				if (
+					(rigidbody.position.x + transform.localScale.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2)
+					&& rigidbody.position.x + transform.localScale.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
+					||
+					(rigidbody.position.x - transform.localScale.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2)
+					&& rigidbody.position.x - transform.localScale.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
 					)
 				{
 					isJumping = false;
