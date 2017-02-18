@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
 	public float maxJumpPressingTime = 8.0f;
 
 	public float liftJumpPower =100;
+	public float liftSpeed = 0.005f;
 
 	bool loadJump = false;
 
@@ -73,7 +74,7 @@ public class Player : MonoBehaviour
 	void RotationCheck()
 	{
 		float zRot = this.transform.rotation.eulerAngles.z;
-		if (zRot > 5 && zRot < 355 && GetComponent<Rigidbody2D>().velocity.magnitude==0)
+		if (zRot > 5 && zRot < 355 && GetComponent<Rigidbody2D>().velocity.magnitude < liftSpeed)
 		{
 			Debug.Log("Poprawka! " + zRot);
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0,liftJumpPower));
@@ -185,6 +186,7 @@ public class Player : MonoBehaviour
 		if(collider.gameObject.tag == "checkpoint")
 		{
 			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
+
 		}
 	}
 

@@ -17,7 +17,8 @@ class Game : MonoBehaviour
 	[SerializeField]
 	List<GameObject> levelFragments = null;
 
-	int currentCheckpoint;
+	[SerializeField]
+	int currentCheckpoint = 0;
 	GameObject player;
 
 	#endregion
@@ -30,7 +31,10 @@ class Game : MonoBehaviour
 
 	void Start()
 	{
-		currentCheckpoint = 0;
+		Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
+		if(checkpointSlideshow)
+            checkpointSlideshow.ShowCutscene();
+
 		player = null;
 	}
 
@@ -59,10 +63,14 @@ class Game : MonoBehaviour
 
 	public void NextCheckpoint(GameObject checkpoint)
 	{
-		for(int i = currentCheckpoint; i < checkpoints.Count; ++i)
+		for(int i = currentCheckpoint + 1; i < checkpoints.Count; ++i)
 		{
 			if(checkpoints[i] == checkpoint)
 			{
+				Slideshow checkpointSlideshow = checkpoint.GetComponent<Slideshow>();
+                if (checkpointSlideshow)
+					checkpointSlideshow.ShowCutscene();
+
 				currentCheckpoint = i;
 			}
 		}
