@@ -6,6 +6,7 @@ TagManager:
   tags:
   - obstacle
   - jellyObstacle
+  - Trigger
   layers:
   - Default
   - TransparentFX
