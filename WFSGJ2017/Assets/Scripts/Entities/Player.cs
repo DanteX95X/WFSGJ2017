@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
 	void Update ()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetMouseButtonDown(0))
         {
             Jump();
         }
@@ -47,7 +47,7 @@ public class Player : MonoBehaviour
 			jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
 			jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
 			jumpDirection = (jumpDirection - transform.position).normalized * jumpForceY;
-			if (jumpDirection.y > 0)
+			if (jumpDirection.y > 100)
 			{
 				isJumping = true;
 				GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
