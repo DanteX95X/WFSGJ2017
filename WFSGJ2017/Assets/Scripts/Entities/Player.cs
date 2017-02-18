@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
 		jumpDirection = (jumpDirection - transform.position).normalized * force;
 		if (jumpDirection.y > 100)
 		{
-			isJumping = true;
+			//isJumping = true;
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
 		}
 
@@ -130,7 +130,33 @@ public class Player : MonoBehaviour
 				rigidbody.AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
 			}
 		}
-		
+	}
+
+	void OnCollisionExit2D(Collision2D collision)
+	{
+		if (collision.collider.gameObject.tag == "obstacle" || collision.collider.gameObject.tag == "jellyObstacle")
+		{
+			isJumping = true;
+		}
+	}
+
+	void OnCollisionStay2D(Collision2D collision)
+	{
+		GameObject collider = collision.collider.gameObject;
+		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
+		if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
+		{
+			if (collider.transform.position.y < transform.position.y)
+			{
+				if (rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2)
+					&& rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2)
+					)
+				{
+					isJumping = false;
+				}
+			}
+		}
 	}
 
 	#endregion methods

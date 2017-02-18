@@ -2,17 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour {
-	public float speed = 10;
-	public Vector3 moveVector = new Vector3(10,0,0);
+public class MovingPlatform : MonoBehaviour
+{
+	#region variables
+
+	[SerializeField]
+	float speed = 10;
+	[SerializeField]
+	Vector3 moveVector = new Vector3(10,0,0);
+
 	Vector3 startPos;
 	Vector3 endPos = new Vector3(0,0,0);
 	Vector3 temp;
 	Vector3 temp2;
 	float startTime;
 	float journeyLength;
-	// Use this for initialization
-	void Start () {
+
+	#endregion
+
+	#region properties
+
+	#endregion
+
+	#region methods
+
+	void Start ()
+	{
 		startPos = transform.position;
 		endPos = startPos + moveVector;
 		temp = endPos - startPos; 
@@ -21,7 +36,7 @@ public class MovingPlatform : MonoBehaviour {
 		journeyLength = Vector3.Distance(startPos, endPos);
 	}
 	
-	// Update is called once per frame
+	
 	void Update () 
 	{
 
@@ -36,4 +51,5 @@ public class MovingPlatform : MonoBehaviour {
 		GetComponent<Rigidbody2D>().velocity = temp.normalized*speed;
 	}
 
+	#endregion
 }
