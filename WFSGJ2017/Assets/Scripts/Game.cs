@@ -15,7 +15,8 @@ class Game : MonoBehaviour
 	[SerializeField]
 	List<GameObject> levelFragments = null;
 
-	int currentCheckpoint;
+	[SerializeField]
+	int currentCheckpoint = 0;
 	GameObject player;
 
 	#endregion
@@ -28,7 +29,7 @@ class Game : MonoBehaviour
 
 	void Start()
 	{
-		currentCheckpoint = 0;
+		//currentCheckpoint = 0;
 		player = null;
 	}
 
