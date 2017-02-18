@@ -7,6 +7,11 @@ public class Player : MonoBehaviour
 	#region variables
 	bool isJumping;
 
+	float jumpTimer = 0;
+	public float jumpScale = 1.0f;
+	public float minJumpPressingTime = 1.0f;
+	public float maxJumpPressingTime = 8.0f;
+
 	[SerializeField]
 	float jumpForceY;
 
@@ -28,17 +33,37 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump();
+			Jump(jumpForceY);
+		}
+
+		if (Input.GetKeyDown(KeyCode.Mouse0))
+		{
+			jumpTimer = Time.time;
+
+		}
+		else if (Input.GetKeyUp(KeyCode.Mouse0) || (Input.GetKey(KeyCode.Mouse0) && (Time.time - jumpTimer) > maxJumpPressingTime))
+		{
+			float deltaTime = Time.time - jumpTimer;
+
+			float scale = 0.0f;
+			if (deltaTime > minJumpPressingTime)
+			{
+				scale += Mathf.Clamp(deltaTime, 0, maxJumpPressingTime) / maxJumpPressingTime;
+			}
+
+			Jump(jumpForceY + jumpForceY * scale * jumpScale * (maxJumpPressingTime - minJumpPressingTime));
+
+			jumpTimer = Time.time;
 		}
 	}
 
-	void Jump()
+	void Jump(float forceY)
 	{
 		if (isJumping)
 			return;
 
 		isJumping = true;
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceY));
+		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, forceY));
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
