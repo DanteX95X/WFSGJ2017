@@ -162,8 +162,8 @@ public class Player : MonoBehaviour
 		GameObject collider = collision.collider.gameObject;
 		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
-		if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
-		{
+		//if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
+		//{
 			if (collider.transform.position.y < transform.position.y)
 			{
 				if (rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2)
@@ -173,7 +173,7 @@ public class Player : MonoBehaviour
 					isJumping = false;
 				}
 			}
-		}
+		//}
 	}
 
 	void OnTriggerEnter2D(Collider2D collider)
