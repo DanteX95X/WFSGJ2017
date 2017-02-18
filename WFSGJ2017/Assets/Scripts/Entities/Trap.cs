@@ -23,7 +23,7 @@ public class Trap : MonoBehaviour
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		if(collision.collider.gameObject.tag == "Player" && GetComponent<Rigidbody2D>().velocity.y < -0.5)
+		if(collision.collider.gameObject.tag == "Player" )//&& GetComponent<Rigidbody2D>().velocity.y < -0.5)
 		{
 			Destroy(collision.collider.gameObject);
 		}
