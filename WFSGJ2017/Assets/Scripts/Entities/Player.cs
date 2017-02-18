@@ -40,7 +40,8 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump(jumpForce);
+			//Jump(jumpForce);
+			Destroy(gameObject);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
