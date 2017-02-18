@@ -35,6 +35,10 @@ class Game : MonoBehaviour
 
 	void Update()
 	{
+		if(Input.GetButtonDown("Cancel")){
+			Application.LoadLevel(0);
+		}
+
 		if(player == null && currentCheckpoint < checkpoints.Count)
 		{
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
