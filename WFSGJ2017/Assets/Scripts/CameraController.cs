@@ -6,6 +6,7 @@ public class CameraController : MonoBehaviour {
 
 	#region variables
 	GameObject player;
+	GameObject background;
 	#endregion
 
 	#region properties
@@ -26,13 +27,17 @@ public class CameraController : MonoBehaviour {
 	void Start ()
 	{
 		player = null;
+		background = GameObject.FindGameObjectWithTag("GameController");
 	}
 	
 
 	void LateUpdate()
 	{
 		if (player)
-			transform.position = player.transform.position + new Vector3(0,0,-10);
+		{
+			transform.position = player.transform.position + new Vector3(0, 0, -10);
+			background.transform.position = transform.position + new Vector3(0,0,15);
+		}
 	}
 
 	#endregion
