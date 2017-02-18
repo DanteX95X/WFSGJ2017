@@ -42,7 +42,8 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump(jumpForce);
+			//Jump(jumpForce);
+			Destroy(gameObject);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -173,6 +174,14 @@ public class Player : MonoBehaviour
 					isJumping = false;
 				}
 			}
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		if(collider.gameObject.tag == "checkpoint")
+		{
+			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
 		}
 	}
 
