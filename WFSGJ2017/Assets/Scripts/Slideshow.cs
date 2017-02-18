@@ -2,32 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Slideshow : MonoBehaviour {
+public class Slideshow : MonoBehaviour
+{
 	Image img;
+	[SerializeField]
 	public float slideDelay = 3;
 	Camera mainCamera;
-	public string filename="test";
-	public int slidesNum=2;
-	// Use this for initialization
-	void Start () {
+
+	[SerializeField]
+	string filename="test";
+	[SerializeField]
+	int slidesNum=2;
+
+	void Start ()
+	{
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 		img = mainCamera.GetComponentInChildren<Image>();
 		img.enabled = false;
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		
 	}
 
-	public void showCutscene(string name, int n)
+	public void ShowCutscene()
 	{
-		int num = n;
 		Time.timeScale = 0;
 		img.enabled = true;
 
-			StartCoroutine(ShowSlide(name,num));
+			StartCoroutine(ShowSlide(filename, slidesNum));
 	}
+
 	IEnumerator ShowSlide(string name, int num)
 	{
 		for (int i = 0; i < num; i++)
@@ -42,10 +48,10 @@ public class Slideshow : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D collider)
 	{
-		if (collider.gameObject.tag == "Player")
+		/*if (collider.gameObject.tag == "Player")
 		{
-			showCutscene(filename,slidesNum);
-		}
+			ShowCutscene(filename,slidesNum);
+		}*/
 	}
 
 }
