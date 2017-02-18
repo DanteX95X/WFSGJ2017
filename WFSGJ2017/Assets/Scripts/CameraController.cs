@@ -6,8 +6,6 @@ public class CameraController : MonoBehaviour {
 
 	#region variables
 	GameObject player;
-	Vector3 offset;
-
 	#endregion
 
 	#region properties
@@ -28,7 +26,6 @@ public class CameraController : MonoBehaviour {
 	void Start ()
 	{
 		player = null;
-		offset = transform.position;
 	}
 	
 

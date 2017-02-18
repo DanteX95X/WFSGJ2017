@@ -15,8 +15,6 @@ public class MovingPlatform : MonoBehaviour
 	Vector3 endPos = new Vector3(0,0,0);
 	Vector3 temp;
 	Vector3 temp2;
-	float startTime;
-	float journeyLength;
 
 	#endregion
 
@@ -31,9 +29,6 @@ public class MovingPlatform : MonoBehaviour
 		startPos = transform.position;
 		endPos = startPos + moveVector;
 		temp = endPos - startPos; 
-
-		startTime = Time.time;
-		journeyLength = Vector3.Distance(startPos, endPos);
 	}
 	
 	
