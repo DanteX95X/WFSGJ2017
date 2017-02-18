@@ -215,7 +215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4946755684012206, guid: eae8f6d9154dbc248b53aa88f94e5dc3, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: eae8f6d9154dbc248b53aa88f94e5dc3, type: 2}
@@ -281,7 +281,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &1585042286 stripped
 GameObject:
@@ -360,6 +360,16 @@ Prefab:
     - target: {fileID: 4595835416833834, guid: 13020972662b0f74a83fe533fe1c1078, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114640063028970394, guid: 13020972662b0f74a83fe533fe1c1078,
+        type: 2}
+      propertyPath: isJumping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114640063028970394, guid: 13020972662b0f74a83fe533fe1c1078,
+        type: 2}
+      propertyPath: jumpForceY
+      value: 300
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 65748369371028022, guid: 13020972662b0f74a83fe533fe1c1078, type: 2}
