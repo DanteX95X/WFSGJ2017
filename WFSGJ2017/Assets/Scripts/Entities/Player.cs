@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+
 	#region variables
 	bool isJumping;
+	Vector3 jumpDirection;
+	Camera mainCamera;
+
 
 	float jumpTimer = 0;
 	public float jumpScale = 1.0f;
 	public float minJumpPressingTime = 1.0f;
 	public float maxJumpPressingTime = 8.0f;
 
+	bool loadJump = false;
+
 	[SerializeField]
-	float jumpForceY;
+	float jumpForce;
 
 	#endregion
 
@@ -23,25 +29,26 @@ public class Player : MonoBehaviour
 
 	#region methods
 
-	void Start ()
+	void Start()
 	{
 		isJumping = true;
-		jumpForceY = 300;
+		jumpForce = 300;
+		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
-	void Update ()
+	void Update()
 	{
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			Jump(jumpForceY);
+			Jump(jumpForce);
 		}
 
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
 			jumpTimer = Time.time;
-
+			loadJump = true;
 		}
-		else if (Input.GetKeyUp(KeyCode.Mouse0) || (Input.GetKey(KeyCode.Mouse0) && (Time.time - jumpTimer) > maxJumpPressingTime))
+		else if (loadJump && (Input.GetKeyUp(KeyCode.Mouse0) || (Input.GetKey(KeyCode.Mouse0) && (Time.time - jumpTimer) > maxJumpPressingTime)))
 		{
 			float deltaTime = Time.time - jumpTimer;
 
@@ -51,38 +58,55 @@ public class Player : MonoBehaviour
 				scale += Mathf.Clamp(deltaTime, 0, maxJumpPressingTime) / maxJumpPressingTime;
 			}
 
-			Jump(jumpForceY + jumpForceY * scale * jumpScale * (maxJumpPressingTime - minJumpPressingTime));
+			Jump(jumpForce + jumpForce * scale * jumpScale * (maxJumpPressingTime - minJumpPressingTime));
 
 			jumpTimer = Time.time;
+			loadJump = false;
 		}
 	}
 
-	void Jump(float forceY)
-	{
-		if (isJumping)
-			return;
+    void Jump(float force)
+    {
+        if (isJumping)
+            return;
 
-		isJumping = true;
-		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, forceY));
-	}
+		jumpDirection = Input.mousePosition;
 
-	void OnCollisionEnter2D(Collision2D collision)
-	{
+		jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
+		jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
+		jumpDirection = (jumpDirection - transform.position).normalized * force;
+		if (jumpDirection.y > 0)
+		{
+			isJumping = true;
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
+		}
+
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
 		GameObject collider = collision.collider.gameObject;
 		if (collider.tag == "obstacle" )
 		{
-			//Debug.Log((collider.transform.position.y + collider.transform.localScale.y / 2));
-			//Debug.Log((transform.position.y - transform.localScale.y / 2));
 			if (collider.transform.position.y < transform.position.y)
 			{
-				//if((transform.position.x - transform.localScale.x) > transform.position )
-				Debug.Log("Jump reset");
-				isJumping = false;
+				if ( transform.position.x < (collider.transform.position.x + collider.transform.localScale.x / 2) 
+					&& transform.position.x > (collider.transform.position.x - collider.transform.localScale.x / 2) 
+					)
+				{
+					Debug.Log("Jump reset");
+					isJumping = false;
+				}
+				else
+				{
+					Debug.Log("Reflected");
+					Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+					rigidbody.AddForce(new Vector2(-100, jumpForce));
+				}
 			}
 			else
 			{
-				//Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-				//rigidbody.velocity = new Vector2(-rigidbody.velocity.x, rigidbody.velocity.y);
+				
 			}
 		}
 	}
