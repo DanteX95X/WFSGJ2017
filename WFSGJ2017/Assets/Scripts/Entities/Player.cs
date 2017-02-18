@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
 	void Start()
 	{
 		isJumping = true;
-		jumpForce = 300;
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
@@ -157,6 +156,14 @@ public class Player : MonoBehaviour
 					isJumping = false;
 				}
 			}
+		}
+	}
+
+	void OnTriggerEnter2D(Collider2D collider)
+	{
+		if(collider.gameObject.tag == "checkpoint")
+		{
+			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
 		}
 	}
 
