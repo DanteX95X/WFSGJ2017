@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
 
 
 	[SerializeField]
-	float jumpForceY;
+	float jumpForce;
 
 	#endregion
 
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     void Start ()
     {
         isJumping = true;
-        jumpForceY = 300;
+        jumpForce = 300;
 		mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 	}
 
@@ -44,14 +44,14 @@ public class Player : MonoBehaviour
 
 		jumpDirection = Input.mousePosition;
 
-			jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
-			jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
-			jumpDirection = (jumpDirection - transform.position).normalized * jumpForceY;
-			if (jumpDirection.y > 0)
-			{
-				isJumping = true;
-				GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
-			}
+		jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
+		jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
+		jumpDirection = (jumpDirection - transform.position).normalized * jumpForce;
+		if (jumpDirection.y > 0)
+		{
+			isJumping = true;
+			GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
+		}
 
     }
 
@@ -73,7 +73,7 @@ public class Player : MonoBehaviour
 				{
 					Debug.Log("Reflected");
 					Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-					rigidbody.AddForce(new Vector2(-100, jumpForceY));
+					rigidbody.AddForce(new Vector2(-100, jumpForce));
 				}
 			}
 			else
