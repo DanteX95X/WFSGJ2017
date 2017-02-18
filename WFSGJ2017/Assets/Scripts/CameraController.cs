@@ -10,14 +10,33 @@ public class CameraController : MonoBehaviour {
 
 	#endregion
 
-	void Start () {
-		player = GameObject.FindGameObjectWithTag("Player");
-		offset = transform.position - player.transform.position;
+	#region properties
+
+	public GameObject Player
+	{
+		get { return player; }
+		set
+		{
+			player = value;
+		}
+	}
+
+	#endregion
+
+	#region  methods
+	
+	void Start ()
+	{
+		player = null;
+		offset = transform.position;
 	}
 	
 
 	void LateUpdate()
 	{
-		transform.position = player.transform.position + offset;
+		if (player)
+			transform.position = player.transform.position + new Vector3(0,0,-10);
 	}
+
+	#endregion
 }
