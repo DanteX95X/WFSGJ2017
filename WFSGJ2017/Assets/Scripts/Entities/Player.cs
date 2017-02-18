@@ -88,7 +88,7 @@ public class Player : MonoBehaviour
 		GameObject collider = collision.collider.gameObject;
 		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
-		if (collider.tag == "obstacle" )
+		if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
 		{
 			if (collider.transform.position.y < transform.position.y)
 			{
@@ -96,7 +96,6 @@ public class Player : MonoBehaviour
 					&& rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2) 
 					)
 				{
-					Debug.Log("Jump reset");
 					isJumping = false;
 				}
 			}
@@ -110,7 +109,6 @@ public class Player : MonoBehaviour
 				(rigidbody.position.x > (colliderRigidbody.position.x + collider.transform.localScale.x / 2) || rigidbody.position.x < (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
 				)
 			{
-				Debug.Log("Reflected");
 				rigidbody.AddForce(new Vector2(-jumpDirection.x, jumpDirection.y));
 			}
 			else if (
@@ -120,7 +118,6 @@ public class Player : MonoBehaviour
 					(/*rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) ||*/ rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2))
 					)
 			{
-				Debug.Log("Reflected");
 				rigidbody.AddForce(new Vector2(jumpDirection.x, -jumpDirection.y));
 			}
 			else if (
@@ -130,7 +127,6 @@ public class Player : MonoBehaviour
 					(rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) /*|| rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2)*/)
 					)
 			{
-				Debug.Log("Reflected");
 				rigidbody.AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
 			}
 		}
