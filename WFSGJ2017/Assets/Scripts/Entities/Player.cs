@@ -58,27 +58,45 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
 		GameObject collider = collision.collider.gameObject;
+		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
+		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
 		if (collider.tag == "obstacle" )
 		{
 			if (collider.transform.position.y < transform.position.y)
 			{
-				if ( transform.position.x < (collider.transform.position.x + collider.transform.localScale.x / 2) 
-					&& transform.position.x > (collider.transform.position.x - collider.transform.localScale.x / 2) 
+				Debug.Log(rigidbody.position.x);
+				Debug.Log((colliderRigidbody.position.x + collider.transform.localScale.x / 2));
+				Debug.Log((colliderRigidbody.position.x - collider.transform.localScale.x / 2));
+				if ( rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) 
+					&& rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2) 
 					)
 				{
 					Debug.Log("Jump reset");
 					isJumping = false;
 				}
-				else
-				{
-					Debug.Log("Reflected");
-					Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
-					rigidbody.AddForce(new Vector2(-100, jumpForce));
-				}
 			}
-			else
+		}
+		if(collider.tag == "jellyObstacle")
+		{
+			if (
+				((rigidbody.position.y + transform.localScale.y / 2 < (colliderRigidbody.position.y + collider.transform.localScale.y / 2) && rigidbody.position.y > (colliderRigidbody.position.y - collider.transform.localScale.y / 2))
+				|| (rigidbody.position.y - transform.localScale.y / 2 < (colliderRigidbody.position.y + collider.transform.localScale.y / 2) && rigidbody.position.y > (colliderRigidbody.position.y - collider.transform.localScale.y / 2)))
+				&&
+				(rigidbody.position.x > (colliderRigidbody.position.x + collider.transform.localScale.x / 2) || rigidbody.position.x < (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
+				)
 			{
-				
+				Debug.Log("Reflected");
+				rigidbody.AddForce(new Vector2(-jumpDirection.x, jumpDirection.y));
+			}
+			else if (
+					((rigidbody.position.x + transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
+					|| (rigidbody.position.x - transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2)))
+					&&
+					(rigidbody.position.y > (colliderRigidbody.position.y + collider.transform.localScale.y / 2) || rigidbody.position.y < (colliderRigidbody.position.y - collider.transform.localScale.y / 2))
+					)
+			{
+				Debug.Log("Reflected");
+				rigidbody.AddForce(new Vector2(jumpDirection.x, -jumpDirection.y));
 			}
 		}
 	}
