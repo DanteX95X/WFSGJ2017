@@ -185,6 +185,7 @@ public class Player : MonoBehaviour
 		if(collider.gameObject.tag == "checkpoint")
 		{
 			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
+
 		}
 	}
 
