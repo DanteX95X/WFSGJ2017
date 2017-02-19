@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
 		jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
 		jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
 		jumpDirection = (jumpDirection - transform.position).normalized * force;
-		if (jumpDirection.y > 20)
+		if (jumpDirection.y > 0)
 		{
 			//isJumping = true;
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
