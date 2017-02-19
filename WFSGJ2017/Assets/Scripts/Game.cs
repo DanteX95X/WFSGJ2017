@@ -47,7 +47,7 @@ class Game : MonoBehaviour
 
 		player = null;
 
-		for(int i = 0; i < 3; ++i)
+		for(int i = 0; i < 6; ++i)
 		{
 			GameObject dummy = Instantiate(collectible) as GameObject;
 			GainLife(dummy.transform.GetChild(0).gameObject);
