@@ -47,7 +47,7 @@ class Game : MonoBehaviour
 
 		player = null;
 
-		for(int i = 0; i < 6; ++i)
+		for(int i = 0; i < 3; ++i)
 		{
 			GameObject dummy = Instantiate(collectible) as GameObject;
 			GainLife(dummy.transform.GetChild(0).gameObject);
@@ -113,12 +113,6 @@ class Game : MonoBehaviour
 		//Application.LoadLevel(0);
 	}
 
-	IEnumerator BackToMenu()
-	{
-		yield return new WaitForSeconds(2);
-		Application.LoadLevel("Menu");
-	}
-
 	public void NextCheckpoint(GameObject checkpoint)
 	{
 		for(int i = currentCheckpoint + 1; i < checkpoints.Count; ++i)
@@ -128,12 +122,6 @@ class Game : MonoBehaviour
 				Slideshow checkpointSlideshow = checkpoint.GetComponent<Slideshow>();
                 if (checkpointSlideshow)
 					checkpointSlideshow.ShowCutscene();
-
-				if(i == checkpoints.Count-1)
-				{
-					StartCoroutine(BackToMenu());
-					//Application.LoadLevel("Menu");
-				}
 
 				currentCheckpoint = i;
 				Instantiate(flag, checkpoint.transform.position, checkpoint.transform.rotation).transform.Translate(new Vector3(0,0,1));
