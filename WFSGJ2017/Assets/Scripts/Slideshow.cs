@@ -28,6 +28,10 @@ public class Slideshow : MonoBehaviour
 
 	public void ShowCutscene()
 	{
+		img = GameObject.FindGameObjectWithTag("MainCamera").GetComponentInChildren<Image>();
+		if (img == null)
+			return;
+
 		Time.timeScale = 0;
 		img.enabled = true;
 

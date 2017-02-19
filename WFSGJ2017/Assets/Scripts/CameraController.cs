@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour {
 	void Start ()
 	{
 		player = null;
+		player = GameObject.FindGameObjectWithTag("Player");
 		background = GameObject.FindGameObjectWithTag("GameController");
 	}
 	

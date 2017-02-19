@@ -29,6 +29,7 @@ public class HandOfGod : MonoBehaviour {
 	void Start()
 	{
 		player = null;
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 

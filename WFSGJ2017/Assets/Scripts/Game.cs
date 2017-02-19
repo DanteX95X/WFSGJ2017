@@ -24,8 +24,8 @@ class Game : MonoBehaviour
 	List<GameObject> lifes = new List<GameObject>();
 
 	[SerializeField]
-	int currentCheckpoint = 0;
-	GameObject player;
+	int currentCheckpoint = -1;
+	GameObject player = null;
 
 	[SerializeField]
 	GameObject collectible = null;
@@ -40,19 +40,20 @@ class Game : MonoBehaviour
 
 	void Start()
 	{
-		Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
+		/*Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
 		if(checkpointSlideshow)
             checkpointSlideshow.ShowCutscene();
 		Instantiate(flag, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation).transform.Translate(new Vector3(0, 0, 1));
 
 		player = null;
-
-		for(int i = 0; i < 6; ++i)
+		*/
+		/*for(int i = 0; i < 6; ++i)
 		{
 			GameObject dummy = Instantiate(collectible) as GameObject;
 			GainLife(dummy.transform.GetChild(0).gameObject);
 			Destroy(dummy);
-		}
+		}*/
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 
@@ -78,6 +79,9 @@ class Game : MonoBehaviour
 
 		if(player == null && currentCheckpoint < checkpoints.Count)
 		{
+			if (currentCheckpoint < 0)
+				currentCheckpoint = 0;
+
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
 			if (lifes.Count > 0)
 			{
