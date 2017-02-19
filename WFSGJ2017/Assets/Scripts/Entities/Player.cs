@@ -85,7 +85,6 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("Poprawka! " + zRot);
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0,liftJumpPower));
-			//GetComponent<Rigidbody2D>().MoveRotation(0);
 			this.transform.Rotate(-this.transform.rotation.eulerAngles);
 		}
 	}
@@ -103,7 +102,7 @@ public class Player : MonoBehaviour
 		jumpDirection.z = transform.position.z - mainCamera.transform.position.z;
 		jumpDirection = mainCamera.ScreenToWorldPoint(jumpDirection);
 		jumpDirection = (jumpDirection - transform.position).normalized * force;
-		if (jumpDirection.y > 100)
+		if (jumpDirection.y > 20)
 		{
 			//isJumping = true;
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(jumpDirection.x, jumpDirection.y));
@@ -196,20 +195,13 @@ public class Player : MonoBehaviour
 		if(collider.gameObject.tag == "checkpoint")
 		{
 			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
-
 		}
 		Debug.Log(collider.gameObject.tag);
 		if (collider.gameObject.tag == "collectible")
 		{
+			mainCamera.GetComponent<Game>().GainLife(collider.transform.GetChild(0).gameObject);
 			Destroy(collider.gameObject);
-			mainCamera.GetComponent<Game>().GainLife();
 		}
-	}
-
-	void OnDestroy()
-	{
-		if(mainCamera)
-			mainCamera.GetComponent<Game>().LoseLife();
 	}
 
 	#endregion methods
