@@ -44,8 +44,22 @@ class Game : MonoBehaviour
 
 	void Update()
 	{
-		if(Input.GetButtonDown("Cancel")){
+		if(Input.GetButtonDown("Cancel"))
+		{
 			Application.LoadLevel(0);
+		}
+
+		if(Input.GetKeyDown(KeyCode.Tab))
+		{
+			if (currentCheckpoint + 1 < checkpoints.Count)
+			{
+				NextCheckpoint(checkpoints[currentCheckpoint + 1]);
+				Destroy(player);
+			}
+			else
+			{
+				Debug.Log("You won");
+			}
 		}
 
 		if(player == null && currentCheckpoint < checkpoints.Count)

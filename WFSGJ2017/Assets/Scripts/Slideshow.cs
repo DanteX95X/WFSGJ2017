@@ -45,13 +45,4 @@ public class Slideshow : MonoBehaviour
 		img.enabled = false;
 		Time.timeScale = 1; 
 	}
-
-	void OnTriggerEnter2D(Collider2D collider)
-	{
-		/*if (collider.gameObject.tag == "Player")
-		{
-			ShowCutscene(filename,slidesNum);
-		}*/
-	}
-
 }
