@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 class Game : MonoBehaviour
 {
@@ -86,6 +88,7 @@ class Game : MonoBehaviour
 			else
 			{
 				Debug.Log("You lose");
+				StartCoroutine("Loose");
 			}
 
 			GetComponent<CameraController>().Player = player;
@@ -99,6 +102,15 @@ class Game : MonoBehaviour
 				Destroy(child);
 			}
 		}
+	}
+	IEnumerator Loose()
+	{
+		Time.timeScale = 0;
+		GetComponentsInChildren<Image>()[1].enabled = true;
+		yield return new WaitForSecondsRealtime(2);
+		GetComponentsInChildren<Image>()[1].enabled = false;
+		Time.timeScale = 1;
+		//Application.LoadLevel(0);
 	}
 
 	public void NextCheckpoint(GameObject checkpoint)
