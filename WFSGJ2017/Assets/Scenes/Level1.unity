@@ -720,7 +720,7 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slideDelay
-      value: 0.01
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
@@ -1034,6 +1034,20 @@ GameObject:
   m_PrefabParentObject: {fileID: 1956822055899678, guid: d3af556c204454240a131a5573389346,
     type: 2}
   m_PrefabInternal: {fileID: 1673113514}
+--- !u!114 &1643667180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1643667179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b56e306ad64f7644be616d473176f17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slideDelay: 0.1
+  filename: HandOfGodDeath
+  slidesNum: 8
 --- !u!1001 &1673113514
 Prefab:
   m_ObjectHideFlags: 0

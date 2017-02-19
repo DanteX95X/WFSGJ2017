@@ -50,6 +50,7 @@ public class HandOfGod : MonoBehaviour {
 	{
 		if (other.gameObject.tag == "Player")
 		{
+			GetComponent<Slideshow>().ShowCutscene();
 			Destroy(other.gameObject);
 		}
 	}
