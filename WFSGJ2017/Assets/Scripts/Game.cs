@@ -113,6 +113,12 @@ class Game : MonoBehaviour
 		//Application.LoadLevel(0);
 	}
 
+	IEnumerator BackToMenu()
+	{
+		yield return new WaitForSeconds(3);
+		Application.LoadLevel("Menu");
+	}
+
 	public void NextCheckpoint(GameObject checkpoint)
 	{
 		for(int i = currentCheckpoint + 1; i < checkpoints.Count; ++i)
@@ -125,6 +131,9 @@ class Game : MonoBehaviour
 
 				currentCheckpoint = i;
 				Instantiate(flag, checkpoint.transform.position, checkpoint.transform.rotation).transform.Translate(new Vector3(0,0,1));
+
+				if (i == checkpoints.Count - 1)
+					StartCoroutine(BackToMenu());
 			}
 		}
 	}
