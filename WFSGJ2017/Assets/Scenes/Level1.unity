@@ -503,12 +503,12 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: filename
-      value: intro
+      value: outro
       objectReference: {fileID: 0}
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slidesNum
-      value: 25
+      value: 41
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e819f6236b3782f4e80683fefabf2e58, type: 2}
@@ -1134,7 +1134,7 @@ MonoBehaviour:
   - {fileID: 1588153987826064, guid: bb2afda87311b7c4da53a492b9531a63, type: 2}
   - {fileID: 1059047536548000, guid: fa025a81c0ba1f442b6389a85b626e9a, type: 2}
   flag: {fileID: 1737167029647678, guid: 8bae3a7ff9b4ebf4c892228ef360af17, type: 2}
-  currentCheckpoint: 5
+  currentCheckpoint: 0
   collectible: {fileID: 1937620571547202, guid: 70533eaa74d895842819ae06b6f95a32,
     type: 2}
 --- !u!114 &1756202962
