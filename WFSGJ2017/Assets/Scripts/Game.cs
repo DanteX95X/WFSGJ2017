@@ -19,11 +19,14 @@ class Game : MonoBehaviour
 	[SerializeField]
 	GameObject flag = null;
 
-	int lifesQuantity = 3;
+	List<GameObject> lifes = new List<GameObject>();
 
 	[SerializeField]
 	int currentCheckpoint = 0;
 	GameObject player;
+
+	[SerializeField]
+	GameObject collectible = null;
 
 	#endregion
 
@@ -41,6 +44,13 @@ class Game : MonoBehaviour
 		Instantiate(flag, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation).transform.Translate(new Vector3(0, 0, 1));
 
 		player = null;
+
+		for(int i = 0; i < 3; ++i)
+		{
+			GameObject dummy = Instantiate(collectible) as GameObject;
+			GainLife(dummy.transform.GetChild(0).gameObject);
+			Destroy(dummy);
+		}
 	}
 
 
@@ -67,6 +77,18 @@ class Game : MonoBehaviour
 		if(player == null && currentCheckpoint < checkpoints.Count)
 		{
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
+			if (lifes.Count > 0)
+			{
+				Debug.Log("Entered");
+				player.transform.GetChild(0).GetComponent<Renderer>().material = lifes[lifes.Count - 1].GetComponent<Renderer>().material;
+				Destroy(lifes[lifes.Count - 1]);
+				lifes.RemoveAt(lifes.Count - 1);
+			}
+			else
+			{
+				Debug.Log("You lose");
+			}
+
 			GetComponent<CameraController>().Player = player;
 			handOfGod.GetComponent<HandOfGod>().Player = player;
 			handOfGod.transform.position = new Vector3(player.transform.position.x - 10, player.transform.position.y, -1);
@@ -95,22 +117,11 @@ class Game : MonoBehaviour
 			}
 		}
 	}
-
-	public void LoseLife()
+	public void GainLife(GameObject life)
 	{
-		--lifesQuantity;
-		if(lifesQuantity <= 0)
-		{
-			lifesQuantity = 0;
-			Debug.Log("You lose");
-		}
-	}
-
-	public void GainLife()
-	{
-		++lifesQuantity;
-		if (lifesQuantity > 9)
-			lifesQuantity = 9;
+		life.transform.parent = transform.GetChild(1);
+		life.transform.position = transform.GetChild(1).position + new Vector3(lifes.Count, 0, 0);
+		lifes.Add(life);
 	}
 	#endregion
 }
