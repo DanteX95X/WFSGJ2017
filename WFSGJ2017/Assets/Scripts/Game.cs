@@ -110,7 +110,7 @@ class Game : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		GetComponentsInChildren<Image>()[1].enabled = false;
 		Time.timeScale = 1;
-		//Application.LoadLevel(0);
+		Application.LoadLevel("Menu");
 	}
 
 	IEnumerator BackToMenu()
