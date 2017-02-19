@@ -79,7 +79,6 @@ class Game : MonoBehaviour
 			player = Instantiate(playerPrefab, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation) as GameObject;
 			if (lifes.Count > 0)
 			{
-				Debug.Log("Entered");
 				player.transform.GetChild(0).GetComponent<Renderer>().material = lifes[lifes.Count - 1].GetComponent<Renderer>().material;
 				Destroy(lifes[lifes.Count - 1]);
 				lifes.RemoveAt(lifes.Count - 1);
