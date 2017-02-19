@@ -94,6 +94,7 @@ public class Player : MonoBehaviour
     {
         if (isJumping)
             return;
+		GetComponent<AudioSource>().Play();
 
 		renderer.localScale = new Vector3(1, 1, 1);
 		renderer.localPosition = new Vector3(0, 0, 0);
