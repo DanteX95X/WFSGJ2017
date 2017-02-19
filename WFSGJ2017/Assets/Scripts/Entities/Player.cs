@@ -197,6 +197,18 @@ public class Player : MonoBehaviour
 			mainCamera.GetComponent<Game>().NextCheckpoint(collider.gameObject);
 
 		}
+		Debug.Log(collider.gameObject.tag);
+		if (collider.gameObject.tag == "collectible")
+		{
+			Destroy(collider.gameObject);
+			mainCamera.GetComponent<Game>().GainLife();
+		}
+	}
+
+	void OnDestroy()
+	{
+		if(mainCamera)
+			mainCamera.GetComponent<Game>().LoseLife();
 	}
 
 	#endregion methods

@@ -9,6 +9,7 @@ TagManager:
   - Trigger
   - checkpoint
   - levelFragment
+  - collectible
   layers:
   - Default
   - TransparentFX

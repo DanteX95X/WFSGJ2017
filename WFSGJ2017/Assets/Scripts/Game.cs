@@ -19,6 +19,8 @@ class Game : MonoBehaviour
 	[SerializeField]
 	GameObject flag = null;
 
+	int lifesQuantity = 3;
+
 	[SerializeField]
 	int currentCheckpoint = 0;
 	GameObject player;
@@ -92,6 +94,23 @@ class Game : MonoBehaviour
 				Instantiate(flag, checkpoint.transform.position, checkpoint.transform.rotation).transform.Translate(new Vector3(0,0,1));
 			}
 		}
+	}
+
+	public void LoseLife()
+	{
+		--lifesQuantity;
+		if(lifesQuantity <= 0)
+		{
+			lifesQuantity = 0;
+			Debug.Log("You lose");
+		}
+	}
+
+	public void GainLife()
+	{
+		++lifesQuantity;
+		if (lifesQuantity > 9)
+			lifesQuantity = 9;
 	}
 	#endregion
 }
