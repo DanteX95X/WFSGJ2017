@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
 				)
 			{
 				rigidbody.AddForce(new Vector2(-jumpDirection.x, jumpDirection.y));
+				jumpDirection = new Vector2(-jumpDirection.x, jumpDirection.y);
 			}
 			else if (
 					((rigidbody.position.x + transform.localScale.x / 2 < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) && rigidbody.position.x > (colliderRigidbody.position.x - collider.transform.localScale.x / 2))
