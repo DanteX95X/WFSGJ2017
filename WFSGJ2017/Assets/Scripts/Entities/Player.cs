@@ -203,6 +203,11 @@ public class Player : MonoBehaviour
 			mainCamera.GetComponent<Game>().GainLife(collider.transform.GetChild(0).gameObject);
 			Destroy(collider.gameObject);
 		}
+		if(collider.gameObject.tag == "Respawn")
+		{
+			collider.GetComponent<Slideshow>().ShowCutscene();
+			collider.transform.position += new Vector3(0, 10000, 0);
+		}
 	}
 
 	#endregion methods
