@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 class Game : MonoBehaviour
 {
@@ -27,8 +28,6 @@ class Game : MonoBehaviour
 	int currentCheckpoint = -1;
 	GameObject player = null;
 
-	[SerializeField]
-	GameObject collectible = null;
 
 	#endregion
 
@@ -40,19 +39,6 @@ class Game : MonoBehaviour
 
 	void Start()
 	{
-		/*Slideshow checkpointSlideshow = checkpoints[currentCheckpoint].GetComponent<Slideshow>();
-		if(checkpointSlideshow)
-            checkpointSlideshow.ShowCutscene();
-		Instantiate(flag, checkpoints[currentCheckpoint].transform.position, checkpoints[currentCheckpoint].transform.rotation).transform.Translate(new Vector3(0, 0, 1));
-
-		player = null;
-		*/
-		/*for(int i = 0; i < 6; ++i)
-		{
-			GameObject dummy = Instantiate(collectible) as GameObject;
-			GainLife(dummy.transform.GetChild(0).gameObject);
-			Destroy(dummy);
-		}*/
 		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
@@ -61,7 +47,8 @@ class Game : MonoBehaviour
 	{
 		if(Input.GetButtonDown("Cancel"))
 		{
-			Application.LoadLevel(0);
+			//Application.LoadLevel(0);
+			SceneManager.LoadScene("Menu");
 		}
 
 		if(Input.GetKeyDown(KeyCode.Tab))
@@ -114,13 +101,15 @@ class Game : MonoBehaviour
 		yield return new WaitForSecondsRealtime(2);
 		GetComponentsInChildren<Image>()[1].enabled = false;
 		Time.timeScale = 1;
-		Application.LoadLevel("Menu");
+		//Application.LoadLevel("Menu");
+		SceneManager.LoadScene("Menu");
 	}
 
 	IEnumerator BackToMenu()
 	{
 		yield return new WaitForSeconds(3);
-		Application.LoadLevel("Menu");
+		//Application.LoadLevel("Menu");
+		SceneManager.LoadScene("Menu");
 	}
 
 	public void NextCheckpoint(GameObject checkpoint)
