@@ -146,7 +146,7 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slideDelay
-      value: 0.2
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
@@ -498,7 +498,7 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slideDelay
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
@@ -673,7 +673,7 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slideDelay
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e819f6236b3782f4e80683fefabf2e58, type: 2}
@@ -1241,7 +1241,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: b45319cff6aba8b4a96148a79e672184, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.535
   m_Pitch: 1
@@ -1636,7 +1636,7 @@ Prefab:
     - target: {fileID: 114895887130224722, guid: e819f6236b3782f4e80683fefabf2e58,
         type: 2}
       propertyPath: slideDelay
-      value: 0.1
+      value: 0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e819f6236b3782f4e80683fefabf2e58, type: 2}
