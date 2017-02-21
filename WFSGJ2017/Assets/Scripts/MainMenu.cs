@@ -23,4 +23,9 @@ public class MainMenu : MonoBehaviour {
 	{
 		Application.Quit();
 	}
+	public void ShowCredits()
+	{
+		//Application.LoadLevel(Application.loadedLevel+1);
+		SceneManager.LoadScene("Credits");
+	}
 }
