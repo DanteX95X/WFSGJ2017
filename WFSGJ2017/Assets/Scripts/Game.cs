@@ -48,6 +48,7 @@ class Game : MonoBehaviour
 		if(Input.GetButtonDown("Cancel"))
 		{
 			//Application.LoadLevel(0);
+			Time.timeScale = 1; 
 			SceneManager.LoadScene("Menu");
 		}
 
@@ -109,6 +110,7 @@ class Game : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		//Application.LoadLevel("Menu");
+		Time.timeScale = 1; 
 		SceneManager.LoadScene("Menu");
 	}
 

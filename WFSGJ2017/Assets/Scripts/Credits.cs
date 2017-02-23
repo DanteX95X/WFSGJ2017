@@ -65,6 +65,7 @@ public class Credits : MonoBehaviour {
 		if (Input.GetButtonDown("Cancel"))
 		{
 			//Application.LoadLevel(0);
+			Time.timeScale = 1; 
 			SceneManager.LoadScene("Menu");
 		}
 	}
