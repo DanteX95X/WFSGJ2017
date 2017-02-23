@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
 	Vector3 jumpDirection;
 	Camera mainCamera;
 	Transform renderer;
+	Rigidbody2D obstacleRigdbody;
 
 
 	float jumpTimer = 0;
@@ -81,10 +82,16 @@ public class Player : MonoBehaviour
 	void RotationCheck()
 	{
 		float zRot = this.transform.rotation.eulerAngles.z;
-		if (zRot > 5 && zRot < 355 && GetComponent<Rigidbody2D>().velocity.magnitude < liftSpeed)
+		Vector2 platformSpeed=new Vector2(0,0);
+		if (obstacleRigdbody != null)
+			platformSpeed = obstacleRigdbody.velocity;
+
+		if (zRot > 5 && zRot < 355 && GetComponent<Rigidbody2D>().velocity.magnitude - platformSpeed.magnitude < liftSpeed)
 		{
 			Debug.Log("Poprawka! " + zRot);
-			GetComponent<Rigidbody2D>().AddForce(new Vector2(0,liftJumpPower));
+			if (Mathf.Abs(platformSpeed.x)< 0.01)
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(0,liftJumpPower));
+			GetComponent<Rigidbody2D>().velocity += platformSpeed;
 			this.transform.Rotate(-this.transform.rotation.eulerAngles);
 		}
 	}
@@ -117,6 +124,7 @@ public class Player : MonoBehaviour
 		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
 		if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
 		{
+			obstacleRigdbody = colliderRigidbody;
 			if (collider.transform.position.y < transform.position.y)
 			{
 				if ( rigidbody.position.x < (colliderRigidbody.position.x + collider.transform.localScale.x / 2) 
@@ -164,6 +172,7 @@ public class Player : MonoBehaviour
 	{
 		if (collision.collider.gameObject.tag == "obstacle" || collision.collider.gameObject.tag == "jellyObstacle")
 		{
+			obstacleRigdbody = null;
 			isJumping = true;
 		}
 	}
@@ -173,6 +182,7 @@ public class Player : MonoBehaviour
 		GameObject collider = collision.collider.gameObject;
 		Rigidbody2D rigidbody = GetComponent<Rigidbody2D>();
 		Rigidbody2D colliderRigidbody = collider.GetComponent<Rigidbody2D>();
+		if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
 		//if (collider.tag == "obstacle" || collider.tag == "jellyObstacle")
 		//{
 			if (collider.transform.position.y < transform.position.y)
